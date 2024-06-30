@@ -1,0 +1,29 @@
+name: "Container Structure Test"
+description: "Execute container structure test"
+authore: "sho-he"
+
+inputs:
+  image:
+    description: "Docker image id with tag"
+    required: true
+  test-config:
+    description: "GoogleContainerTools/container-structure-test test config path"
+    required: true
+  output:
+    description: "Output format"
+    required: false
+    default: "text"
+  dockerless:
+    default: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - container-structure-test
+    - test
+    - --image
+    - ${{ inputs.image }}
+    - --config
+    - ${{ inputs.test-config }}
+    - --output
+    - ${{ inputs.output }}
